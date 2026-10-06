@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>AETSI Terrain</title>
+
+<!-- iOS home screen / full-screen support -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AETSI Terrain">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1c6fb8">
+<link rel="apple-touch-icon" href="data:image/png;base64,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z7rh9vm3BAeZAQD/Dx/7FPXBuoZQAAAAAElFTkSuQmCCIj48L2xpbms+XG48bGluayByZWw9Imljb24iIGhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBTFFBQUFDMENBSUFBQUN5cjVGbEFBQVl6RWxFUVZSNG5PMmRlWEFjVjVuQXYrKzlQdVllalE1THNpM2I4aDA3c1IzTFRrSU9BOFlKaERqR0NkZFNDYkNjQ3l3VXRTeFZoRnFPcmFXNFVzV1NBRXNXaDNCVURvNXNrVGdrY1Vod0RpZmtORDRTMmJGOHk3WjhTTll4STgzVjNlOTkrMGZMaWp4U3l5TlpzcWFIOTZzdWw2WHBhYzNNKzgxNzMvdmUwVGo5eTArQVFqRWNiTEpmZ0tKMFVYSW9QRkZ5S0R4UmNpZzhVWElvUEZGeUtEeFJjaWc4VVhJb1BGRnlLRHhSY2lnOFVYSW9QRkZ5S0R4UmNpZzhVWElvUEZGeUtEeFJjaWc4VVhJb1BGRnlLRHhSY2lnOFVYSW9QRkZ5S0R4UmNpZzhVWElvUEZGeUtEeFJjaWc4VVhJb1BGRnlLRHhSY2lnOFVYSW9QRkZ5S0R4UmNpZzhVWElvUEZGeUtEeFJjaWc4VVhJb1BGRnlLRHhSY2lnOFVYSW9QRkZ5S0R4UmNpZzhVWElvUEZGeUtEeFJjaWc4VVhJb1BGRnlLRHdwQnpsd1hFOVRERkFPY2dnQ1NUVHlPVVFnaUpRZm8wS2I3QmR3WGlDQUk2a2lwRC93K1JVVllaMW9tT3JCdFVZU2ZmcWVIYzNIVWlHRG45T2tBUmhpT3UvOCtKWkxycGxmSllnNG5wZGRCSUFBZVVkODVLNi9IKy9PR2hvcitvVk1EdjZXZ3pGTVo1MmJtdXFYell5ZjgrVDFUWFZiRDNXSFRRNmpLUklpbUpZSXpxb0pqZjFWRmx3UVNPZFk0bHE0K0x0WklRS040YzBycGtvaVI1Q2s0UTlIa2lTNGNWbGRWY1J3NUtpTHhYS2tKTEtGOUxwK2tZY2dra1JaUy9qQ0RQQzFISWlRczhXQytzaFY4eXNaSW1mSWNQaERZd2dBczZlRTN6YTNNcDEzT0J0ZDY0QUlYbGNlMnpFeG44ZjQ0Mk01R0dMR0V1OWRXaHZRdVpBMDhtZnV4aGszTjlYTDBkY2MvN0Q0TmVaQUFDRXBHdERXTjlVRHdEbS9qVzRzdWViaW1oblZvZE1wUzlmR3JkVVhrc2dOTmM5MVFUb1RRWS9QSDU1NC9GcHpJTU9NSlZZMEpoWlBpeEhCT2V0cVJCQkVpYkN4WmxGTnhuTEdzVzduRERXT212dnZpSWZPVWVNWU1UVy90Q3crcmpsc1I3NXZlUjBpQ0ZuWXlTUUFvQ0hWQ1FFZzNMeGk2cjB2SHFYeHFEZmNtdUQzcjdTMW5zNllSZlJMejlRY01wVzFSeHYzVEFxK2xNTTFvNjRpOE42bHRUQmNtNEl3VEVLVU1RU0N5K2NrRmsrTHZkbldHelRZZVZid1JJU0lHNTQ1L015dTlsaW8ySDRRQXNSREdtYys2TTM2VWc3R01KbDEzcnUwcnI0aUlJa0cxOUpFZ0FodFhibGsxbDQwTFNvSkJyNmlDQ0NJREkydFhWYTcvWEJQMkJ4Rk5td0VFbUc5Sm03R0FucXhQVlR5VGRqaHk1aURBRGpEbTFmV0UwQkJpYmpsL2VpT0V4dWVPUXdBQmMySGE5RzZTK3ZqSVgyOFNraElja1E1N3IvRkhENHhBL3dvQnlMa0xERzNOclJxUVRXNmpjVWczRnBrOCs3VFQrL3V5TnV5b1BabWlKSm9RWDNrOGptSmRGNzRvdUdmUlB3bkIwZk1XdUk5bDlTR1RTN2tXV05wa2dnUjJycHpPNDhrajNYblhqM1lEVkE0SnVmK3RMNnAzcEZ5WEY3UGFGTms0L0pITHd6K2l6bUVwSkNwclcrYUNrT0NUamZmOEZSemUwZHZIZ0Qvdk9Qa05RdXFDcDZPaUFEdzdrdHFweWVDUFJsYlkzaWV0WHplbGhuTDBUZ1R4YlVYcHU2YitzcG5jcmpEcEN0bko1Yk5pQkVOYlZNQUFCN2JlUW9SVFkwOXM3dWpMKzlFVEkwR2FjUVFwS1NhcUxINm9wcDdYenlTQ0J0RkZxb1hNNnREaTZiRklxWldURUJLQk1lNnNvNzB4K1FCMzhrQmxpUFhMYTlqREF2U0c1S0FJUjdxU0c4OTJCM1V1Y2J4UUh2bXBmM2RheGJYU0VtRHd3c0NJSUNiVnRiLzdwVmo1OU5mY2R1SXV6Nit0SmlUKzhmcmJYbmxkN2EwK1dHOEh2d1ZjeUNBTFdSTnpGeTd0QTZHcERmY2pzbGYzbWp2N0xOMGpnQWdwSHhzeDhtaDMxSEdFQUd1bWxlMW9ENlN0WVd2d29BTGlwL2tZQXo3OHVMcStWVU5WY0dDOUFZQU1FUWllSHpuS1Yxamtra1NoUXorN0p1blUxbW5vTS9panNzRWRQYmVKYlU1Uy9nclNMeVEvRWtPbDV0WDFNTnc2UTFFYURuWnQ3MDE2YzcxSWdKVDU2Mm5NOCszZE5LUVBvdnJ3L3FtK21oQUZ6NkpBQzQ4dnBFREVYSzJuRjBUZnVkRjFRQ0ZJMjF1MFcvYWVjcnRnQXo4WGhJOHV1TWtEbW1EM0dwbThmVFlpc1o0Smkv UOFx2zc0ieIa4pv5GCImbxz3cU1saA+dPYGQxSSnnjjlKmxgfSFJAqb/PmWzs4+y7VhMO584/c11dtCno8akkjIYg9/zSbxjRySIGDwm1ZMHe4hQoTmY6nXj6ZCBh8oACIwNHasO/vsntNDWxa3srh+SW1dReB8/HAnoZ3z0BhyhkHzPCcpX1D80ZVliGnLWTYj3jSrgoakzN3c15PNHTlLhKOGEG9JwBhqDP/yevv7V0wdWtlIovqKwDsWVv/xlbaKsD7ahIc7Kvvth/a8cTQZMrRihvGkhO60rflhSBb8Igci5G1547I6jaMYkrTgDDOWuP/Fo315R9BZg23uzKuHt534j/ctmFkVHDxIC2esumlF/f+92jaG0nJTFy/t73p6V0c8VJRbCBA2NfRJ7eEPORwpqyLGjcuHSW+4CEHfWLeAALCwHwOIaDvSzXwUPNWtgVYtqJpbF249nTX1sSSmIqaWCOtuJFTM+eeZkL2Q+EAOzjCZca5fUj27Jjw0veH+EA1qH7hsmHCkgAKx3IRH2NTes6T2jicOhAzujN6OwQHpaJ9b4vgjIJUE7kTiEcpOSHK8j5EL/aamqaHiBkf+oSh1OdxoY2Z18NqLp8CQUHQwbo/A6/Bq5d3k6ZIZseUz45m8ypaeRanL4S5OWbO4JhGeqFSmJOKI65bX5R05hmQYjv7wC6UuBxEYGt48XHrD5a1ZesUdQ6/g1io3LKubEjPHkPAQBIJoVIdfmq+SDkgZYtZyFk2NXT4n4XZZC04Y9pej/ysgiRoqg9fMr9q47USRndIBTI0FdR7UefHPEkSO8IEgJS4HZG259tJanbOC9AacSTPc81zrrrZUQOcjfx0RwRZUFTG+cv0cgxfWlwMJj43bTozm5SEAbPjEMsuRRcYq7rvYuO3k1/7QXHzvd7IoaTncvTfWLR9mwaObzurozf/XxpZTyZzB2cgzQt1nC0mrF1VfNjtRoJob566+qKaxJny8Z3QzcRJhvfh3NPAUX7QspSsHY9ibtVcvqllQFxm64JGIAHHz7tOpjD09ESzmK6hx7Oi1Httx8rLZiYKH+lfeBrXrLqn5+eZDAZ0X360dVTG7UvqiTYFSDkjdArupaSoMGTODMxXJY9tPAkCRoajlkKGxv+7qyDvSK1K5qWlqUOejmpeOOJbDF5SoHIhgOXJaZfC6S2pguNkbDPFYV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">
+
+<style>
+:root{
+  --blue:#1c6fb8;
+  --blue-dark:#114f87;
+  --red:#dd3024;
+  --red-dark:#b4241a;
+  --bg:#f3f5f8;
+  --card:#ffffff;
+  --ink:#1b2430;
+  --ink-soft:#5b6673;
+  --border:#e1e6ec;
+  --ok:#1e8e3e;
+  --radius:14px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:env(safe-area-inset-bottom);
+  padding-top:env(safe-area-inset-top);
+}
+.app{max-width:640px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;}
+
+/* Header */
+header.topbar{
+  background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+  color:#fff;
+  padding:18px 20px 22px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  position:sticky;top:0;z-index:20;
+  box-shadow:0 2px 10px rgba(0,0,0,.12);
+}
+header.topbar .back{
+  background:rgba(255,255,255,.18);
+  border:none;color:#fff;border-radius:10px;
+  width:38px;height:38px;font-size:20px;line-height:1;cursor:pointer;
+  display:none;align-items:center;justify-content:center;flex-shrink:0;
+}
+header.topbar .back.show{display:flex;}
+header.topbar .brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0;}
+header.topbar .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--red);flex-shrink:0;}
+header.topbar h1{font-size:17px;margin:0;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+header.topbar .sub{font-size:12px;opacity:.85;margin-top:2px;}
+
+main{flex:1;padding:16px 16px 100px;}
+
+/* Home screen cards */
+.home-intro{padding:4px 2px 18px;}
+.home-intro h2{font-size:20px;margin:0 0 4px;}
+.home-intro p{margin:0;color:var(--ink-soft);font-size:14px;}
+
+.form-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+.form-card{
+  background:var(--card);
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  padding:16px;
+  display:flex;align-items:center;gap:14px;
+  cursor:pointer;
+  box-shadow:0 1px 3px rgba(16,24,40,.05);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.form-card:active{transform:scale(.98);}
+.form-card .icon{
+  width:48px;height:48px;border-radius:12px;flex-shrink:0;
+  background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+}
+.form-card .icon.red{background:var(--red);}
+.form-card .meta{flex:1;min-width:0;}
+.form-card .meta .t{font-weight:700;font-size:15.5px;}
+.form-card .meta .s{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
+.form-card .chev{color:var(--ink-soft);font-size:18px;}
+
+/* Queue banner */
+.queue-banner{
+  background:#fff7e6;border:1px solid #ffdf99;color:#8a5a00;
+  border-radius:12px;padding:10px 14px;font-size:13px;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.queue-banner button{
+  margin-left:auto;background:#fff;border:1px solid #ffdf99;border-radius:8px;
+  padding:5px 10px;font-size:12px;color:#8a5a00;cursor:pointer;
+}
+
+/* Form rendering */
+.field{
+  background:var(--card);border-radius:var(--radius);border:1px solid var(--border);
+  padding:14px 16px;margin-bottom:12px;
+}
+.field label.flabel{display:block;font-weight:600;font-size:14.5px;margin-bottom:8px;line-height:1.35;}
+.field label.flabel .req{color:var(--red);margin-left:3px;}
+.field input[type=text],
+.field input[type=date],
+.field textarea{
+  width:100%;border:1px solid var(--border);border-radius:10px;
+  padding:10px 12px;font-size:15px;font-family:inherit;background:#fbfcfe;
+  color:var(--ink);
+}
+.field textarea{min-height:84px;resize:vertical;}
+.field input:focus,.field textarea:focus{outline:2px solid var(--blue);outline-offset:1px;background:#fff;}
+
+.opt-row{display:flex;gap:8px;flex-wrap:wrap;}
+.opt-btn{
+  flex:1;min-width:80px;text-align:center;
+  border:1.5px solid var(--border);border-radius:10px;padding:10px 8px;
+  font-size:14px;font-weight:600;color:var(--ink-soft);background:#fbfcfe;cursor:pointer;
+  user-select:none;
+}
+.opt-btn.selected{border-color:var(--blue);background:var(--blue);color:#fff;}
+.opt-btn.selected.opt-non{border-color:var(--red);background:var(--red);}
+
+.grid-section{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:14px 16px;margin-bottom:12px;}
+.grid-section > .gtitle{font-weight:700;font-size:15px;margin-bottom:10px;}
+.grid-row{padding:10px 0;border-top:1px solid var(--border);}
+.grid-row:first-of-type{border-top:none;}
+.grid-row .glabel{font-size:13.5px;color:var(--ink);margin-bottom:7px;}
+.grid-row .opt-row .opt-btn{padding:8px 6px;font-size:13px;min-width:0;}
+
+/* Photo field */
+.photo-field{display:flex;flex-direction:column;gap:10px;}
+.photo-preview{
+  width:100%;max-height:220px;border-radius:10px;overflow:hidden;
+  display:none;background:#eef1f5;
+}
+.photo-preview img{width:100%;display:block;object-fit:cover;}
+.photo-buttons{display:flex;gap:10px;}
+.photo-btn{
+  flex:1;border:1.5px dashed var(--blue);border-radius:10px;background:#f2f7fc;
+  color:var(--blue);font-weight:600;font-size:13.5px;padding:12px 8px;cursor:pointer;
+  text-align:center;
+}
+.photo-status{font-size:12.5px;color:var(--ink-soft);}
+.photo-status.ok{color:var(--ok);}
+.photo-status.err{color:var(--red);}
+
+/* Submit bar */
+.submit-bar{
+  position:sticky;bottom:0;background:linear-gradient(180deg,rgba(243,245,248,0),var(--bg) 25%);
+  padding:14px 0 10px;margin-top:6px;
+}
+.btn-submit{
+  width:100%;background:var(--blue);color:#fff;border:none;border-radius:12px;
+  padding:15px;font-size:16px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 14px rgba(28,111,184,.35);
+}
+.btn-submit:active{transform:scale(.99);}
+.btn-submit:disabled{opacity:.6;}
+.error-summary{
+  background:#fdeceb;border:1px solid #f6c1bc;color:var(--red-dark);
+  border-radius:10px;padding:10px 14px;font-size:13.5px;margin-bottom:12px;display:none;
+}
+
+/* Success screen */
+.success-screen{text-align:center;padding:60px 20px;}
+.success-screen .check{
+  width:72px;height:72px;border-radius:50%;background:var(--ok);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 18px;
+}
+.success-screen h2{margin:0 0 8px;font-size:20px;}
+.success-screen p{color:var(--ink-soft);margin:0 0 24px;font-size:14px;}
+.success-screen.queued .check{background:#e59500;}
+.btn-secondary{
+  background:#fff;border:1.5px solid var(--border);color:var(--ink);
+  border-radius:10px;padding:12px 20px;font-size:14.5px;font-weight:600;cursor:pointer;
+}
+
+.hidden{display:none !important;}
+
+/* Toast */
+#toast{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+  background:#1b2430;color:#fff;padding:10px 18px;border-radius:10px;font-size:13.5px;
+  z-index:999;opacity:0;pointer-events:none;transition:opacity .25s ease;
+  max-width:88vw;text-align:center;
+}
+#toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button class="back" id="backBtn" aria-label="Retour">&#8592;</button>
+    <div class="brand">
+      <span class="dot"></span>
+      <div>
+        <h1 id="headerTitle">AETSI Terrain</h1>
+        <div class="sub" id="headerSub">Saisie sécurité &amp; qualité</div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main"></main>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const FORMS = [{"id": "audit_chantier", "title": "Audit Chantier", "subtitle": "FORM 05", "icon": "chantier", "actionId": "1FAIpQLSeiBWW-m18WyukJ6rarSMjeblf7YeD5hN_Q9vln0WY6YD3X6Q", "fields": [{"type": "date", "entry": 1198512077, "label": "Date", "required": true}, {"type": "text", "entry": 149776445, "label": "Numéro d'affaire", "required": false}, {"type": "text", "entry": 1421238477, "label": "Chantier / Client", "required": true}, {"type": "textarea", "entry": 735090550, "label": "Techniciens", "required": true}, {"type": "grid", "title": "1 - Les protections collectives sont-elles correctement disposées et utilisées ?", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 1188890270, "label": "Echafaudages"}, {"entry": 604968907, "label": "Protection collective existante sur le chantier"}, {"entry": 2130240201, "label": "Balisage de la zone de travail"}]}, {"type": "grid", "title": "2 - Les protections individuelles sont-elles correctement utilisées par les intervenants ?", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 226616042, "label": "Casque"}, {"entry": 669320857, "label": "Lunettes"}, {"entry": 2110527089, "label": "Gants"}, {"entry": 200716142, "label": "Vêtements de travail adéquat"}, {"entry": 1397886438, "label": "Bouchons d'oreilles"}, {"entry": 1474691133, "label": "Autre"}]}, {"type": "grid", "title": "3 - Les risques sont-ils suffisamment connus par le personnel ?", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 194782441, "label": "Connaissances des risques"}]}, {"type": "grid", "title": "4 - La documentation est-elle commentée et disponible sur le lieu de travail ?", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 226400080, "label": "Classeur SSE (présence, tenue, état)"}, {"entry": 195326957, "label": "Modes opératoires"}, {"entry": 91127932, "label": "Permis de travail - plan de prévention"}, {"entry": 1760831393, "label": "Permis feu"}, {"entry": 320565852, "label": "Autres (permis de fouille, permis de pénétrer, consignation)"}, {"entry": 1791387739, "label": "Présence du dossier de chantier"}, {"entry": 725598933, "label": "FDS (Fiches de données de sécurité)"}]}, {"type": "grid", "title": "5 - Les intervenants connaissent-ils", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 1201830362, "label": "Le contenu des permis"}, {"entry": 498353255, "label": "Les signaux d'alerte (téléphone le plus proche, point de rassemblement, douche, lave-oeil)"}, {"entry": 1819384655, "label": "La procédure en cas d'accident et situations d'urgences"}]}, {"type": "grid", "title": "6 - Tâches", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 1382787427, "label": "Le descriptif des travaux à réaliser est-il connu du personnel"}, {"entry": 2118396922, "label": "Les tâches sont-elles correctement réalisées"}]}, {"type": "grid", "title": "7 - Outillage utilisé", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 1796725342, "label": "Suffisant et adapté"}, {"entry": 593108861, "label": "Bon état et vérifié périodiquement"}, {"entry": 792929949, "label": "Correctement utilisé"}]}, {"type": "grid", "title": "8 - Matériel et véhicule", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 1769148, "label": "Nacelle élévatrice : état général"}, {"entry": 640758217, "label": "Nacelle élévatrice : propreté"}, {"entry": 2110434746, "label": "Nacelle élévatrice : conformité"}, {"entry": 840749852, "label": "Nacelle élévatrice : autre"}, {"entry": 226959091, "label": "Chariot élévateur : état général"}, {"entry": 400090138, "label": "Chariot élévateur : propreté"}, {"entry": 998937787, "label": "Chariot élévateur : conformité"}, {"entry": 755691759, "label": "Chariot élévateur : autre"}, {"entry": 2032673592, "label": "Conformité du véhicule (propreté, contrôle technique...)"}, {"entry": 1134728273, "label": "Permis du conducteur"}]}, {"type": "grid", "title": "9 - Habilitations nécessaires", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 1607260952, "label": "Electrique"}, {"entry": 496321601, "label": "Nacelle"}, {"entry": 1859907869, "label": "Chariot élévateur"}, {"entry": 72237652, "label": "Autre"}]}, {"type": "grid", "title": "10 - Généralités", "options": ["Oui", "Non", "Non concerné"], "required": true, "rows": [{"entry": 1895857901, "label": "Aire de circulation respectée"}, {"entry": 553279966, "label": "Aire de stockage du matériel respectée"}, {"entry": 986667218, "label": "Respect propreté du chantier (gestion des déchets, tri...)"}, {"entry": 1222927341, "label": "Respect de l'environnement"}]}, {"type": "textarea", "entry": 1157308447, "label": "Remarques par rapport aux observations faites ci-dessus", "required": false}, {"type": "textarea", "entry": 2067934759, "label": "Remarques sur le comportement sécurité du personnel", "required": false}, {"type": "textarea", "entry": 1455393753, "label": "Idées d'amélioration", "required": true}, {"type": "radio", "entry": 2095505417, "label": "Actions à planifier", "options": ["Oui", "Non"], "required": false}, {"type": "textarea", "entry": 2139646041, "label": "Détail des actions", "required": false}, {"type": "text", "entry": 799174448, "label": "Auditeur(s)", "required": true}]}, {"id": "situation_dangereuse", "title": "Situation dangereuse", "subtitle": "FORM 06", "icon": "alerte", "actionId": "1FAIpQLSdCRcZnHmBbgwGe1nUeWQk7X0h2UvxVau4H2cdf5I1bujeLFQ", "fields": [{"type": "textarea", "entry": 1421238477, "label": "Lieu exact", "required": true}, {"type": "date", "entry": 1198512077, "label": "Date", "required": true}, {"type": "text", "entry": 799174448, "label": "Nom / prénom", "required": true}, {"type": "textarea", "entry": 1157308447, "label": "Description de la situation", "required": true, "photoTarget": true}, {"type": "photo", "label": "Photo"}, {"type": "checkbox", "entry": 2126869600, "label": "Est-ce une situation dangereuse ?", "options": ["Oui", "Non"], "required": true}, {"type": "textarea", "entry": 1168749820, "label": "Idée(s) à soumettre", "required": true}]}, {"id": "briefing_sse", "title": "Briefing SSE chantier", "subtitle": "", "icon": "briefing", "actionId": "1FAIpQLSfmZVYazNMs1kKUTMM9hag3wZ0YX2EA_PxENdww4DikHI-31g", "fields": [{"type": "text", "entry": 2062281755, "label": "Rédacteur", "required": true}, {"type": "date", "entry": 1561106773, "label": "Formalisé le", "required": true}, {"type": "text", "entry": 1484586964, "label": "Chantier / Client", "required": true}, {"type": "radio", "entry": 552196749, "label": "Les modes opératoires et/ou analyses de risques sont disponibles sur le lieu d'intervention ?", "options": ["Oui", "Non"], "required": true}, {"type": "radio", "entry": 635237235, "label": "Les risques de l'intervention et les parades associées ont tous été identifiés ?", "options": ["Oui", "Non"], "required": true}, {"type": "radio", "entry": 1036520703, "label": "Les conditions de travail (risques, moyens techniques et humains...) sont conformes à ce qui a été prescrit ?", "options": ["Oui", "Non"], "required": true}, {"type": "radio", "entry": 1927666176, "label": "Les équipements de protections collectives et/ou individuelles sont disponibles pour le chantier ?", "options": ["Oui", "Non"], "required": true}, {"type": "radio", "entry": 1817095001, "label": "Les rôles et responsabilités de chacun sont connus ?", "options": ["Oui", "Non"], "required": true}, {"type": "textarea", "entry": 485787779, "label": "Si ces conditions ne sont pas réunies, nécessité de mettre en place une action avant de prendre le poste", "required": false}]}, {"id": "audit_vehicule", "title": "Audit véhicule", "subtitle": "", "icon": "vehicule", "actionId": "1FAIpQLSdtntK-sqta0GQV8sqg_SWJl__BCwLa8jMaE7b9Wlf5K_0RwA", "fields": [{"type": "date", "entry": 1561106773, "label": "Audit réalisé le", "required": true}, {"type": "text", "entry": 1484586964, "label": "N° d'immatriculation", "required": true}, {"type": "text", "entry": 1613376251, "label": "Désignation du véhicule", "required": true}, {"type": "text", "entry": 1209435211, "label": "Kilométrage", "required": true}, {"type": "text", "entry": 2062281755, "label": "Auditeur(s)", "required": true}, {"type": "text", "entry": 1075830780, "label": "Nom du responsable du véhicule", "required": false}, {"type": "grid", "title": "Extérieur du véhicule", "options": ["Bon", "Mauvais"], "required": false, "rows": [{"entry": 552196749, "label": "Etat général extérieur"}, {"entry": 609468447, "label": "Pneus"}, {"entry": 356013743, "label": "Vignette"}, {"entry": 1487095291, "label": "Essuie-glaces"}, {"entry": 1001521193, "label": "Niveaux"}, {"entry": 138485986, "label": "Feux"}, {"entry": 1187513486, "label": "Rétroviseurs"}]}, {"type": "textarea", "entry": 832303164, "label": "Commentaires", "required": false}, {"type": "grid", "title": "Intérieur du véhicule", "options": ["Bon", "Mauvais"], "required": false, "rows": [{"entry": 635237235, "label": "Etat général intérieur"}, {"entry": 384495916, "label": "Rangement"}, {"entry": 54724233, "label": "Propreté"}, {"entry": 660846254, "label": "Gilet Fluo - Triangle de signalisation"}, {"entry": 1266733289, "label": "Trousse de secours"}, {"entry": 561647714, "label": "Ceintures de sécurité"}, {"entry": 878373798, "label": "Gilet de sécurité"}, {"entry": 125017981, "label": "Triangle de signalisation"}, {"entry": 501405517, "label": "Conformité du matériel (sangle...)"}]}, {"type": "textarea", "entry": 1976610980, "label": "Observations", "required": false}, {"type": "radio", "entry": 307765739, "label": "Actions à reporter dans le plan d'action", "options": ["Oui", "Non"], "required": false}, {"type": "textarea", "entry": 438463495, "label": "Détail des actions à reporter", "required": false}]}];
+const PHOTO_ENDPOINT = "https://script.google.com/macros/s/AKfycbwD_7m32ZzNBKB3eQJsu5cqJYw7P0kMu1uTKSdM602MPDNEjsLfPempu4J03dXAWtHmmg/exec";
+const QUEUE_KEY = "aetsi_pending_submissions_v1";
+
+const ICONS = {
+  chantier: "&#127959;",
+  alerte: "&#9888;",
+  briefing: "&#128221;",
+  vehicule: "&#128666;"
+};
+
+let state = {
+  screen: "home",
+  values: {},
+  photo: { status: "idle", url: null, base64: null, filename: null }
+};
+
+const mainEl = document.getElementById("main");
+const backBtn = document.getElementById("backBtn");
+const headerTitle = document.getElementById("headerTitle");
+const headerSub = document.getElementById("headerSub");
+
+backBtn.addEventListener("click", () => {
+  if (state.screen !== "home") {
+    goHome();
+  }
+});
+
+function toast(msg, ms) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.remove("show"), ms || 2600);
+}
+
+function goHome() {
+  state.screen = "home";
+  state.values = {};
+  state.photo = { status: "idle", url: null, base64: null, filename: null };
+  backBtn.classList.remove("show");
+  headerTitle.textContent = "AETSI Terrain";
+  headerSub.textContent = "Saisie sécurité & qualité";
+  renderHome();
+}
+
+function openForm(formId) {
+  const form = FORMS.find(f => f.id === formId);
+  if (!form) return;
+  state.screen = formId;
+  state.values = {};
+  state.photo = { status: "idle", url: null, base64: null, filename: null };
+  backBtn.classList.add("show");
+  headerTitle.textContent = form.title;
+  headerSub.textContent = form.subtitle || "AETSI";
+  renderForm(form);
+}
+
+function renderHome() {
+  const pending = getQueue();
+  let html = "";
+  if (pending.length > 0) {
+    html += `<div class="queue-banner">
+      <span>&#9203; ${pending.length} envoi(s) en attente de connexion</span>
+      <button id="retryQueueBtn">Réessayer</button>
+    </div>`;
+  }
+  html += `<div class="home-intro">
+    <h2>Formulaires AETSI</h2>
+    <p>Sélectionnez un formulaire à remplir sur le terrain.</p>
+  </div>
+  <div class="form-grid">`;
+  FORMS.forEach((f, i) => {
+    const iconHtml = ICONS[f.icon] || "&#128196;";
+    const iconClass = (f.id === "situation_dangereuse") ? "icon red" : "icon";
+    html += `<div class="form-card" data-form="${f.id}">
+      <div class="${iconClass}">${iconHtml}</div>
+      <div class="meta">
+        <div class="t">${esc(f.title)}</div>
+        <div class="s">${esc(f.subtitle || "Formulaire AETSI")}</div>
+      </div>
+      <div class="chev">&#8250;</div>
+    </div>`;
+  });
+  html += `</div>`;
+  mainEl.innerHTML = html;
+
+  mainEl.querySelectorAll(".form-card").forEach(card => {
+    card.addEventListener("click", () => openForm(card.dataset.form));
+  });
+  const retryBtn = document.getElementById("retryQueueBtn");
+  if (retryBtn) retryBtn.addEventListener("click", flushQueue);
+}
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function renderForm(form) {
+  let html = `<div class="error-summary" id="errorSummary"></div>`;
+  form.fields.forEach((field, idx) => {
+    html += renderField(field, idx);
+  });
+  html += `<div class="submit-bar"><button class="btn-submit" id="submitBtn">Envoyer le formulaire</button></div>`;
+  mainEl.innerHTML = html;
+
+  mainEl.querySelectorAll(".opt-btn").forEach(btn => {
+    btn.addEventListener("click", () => handleOptionClick(btn));
+  });
+
+  const photoInput = mainEl.querySelector("#photoInput");
+  if (photoInput) {
+    photoInput.addEventListener("change", handlePhotoSelected);
+  }
+
+  document.getElementById("submitBtn").addEventListener("click", () => submitForm(form));
+}
+
+function renderField(field, idx) {
+  if (field.type === "text") {
+    return `<div class="field">
+      <label class="flabel">${esc(field.label)}${field.required ? '<span class="req">*</span>' : ""}</label>
+      <input type="text" data-entry="${field.entry}" data-type="text" autocomplete="off">
+    </div>`;
+  }
+  if (field.type === "textarea") {
+    const targetAttr = field.photoTarget ? 'data-photo-target="1"' : "";
+    return `<div class="field">
+      <label class="flabel">${esc(field.label)}${field.required ? '<span class="req">*</span>' : ""}</label>
+      <textarea data-entry="${field.entry}" data-type="textarea" ${targetAttr}></textarea>
+    </div>`;
+  }
+  if (field.type === "date") {
+    return `<div class="field">
+      <label class="flabel">${esc(field.label)}${field.required ? '<span class="req">*</span>' : ""}</label>
+      <input type="date" data-entry="${field.entry}" data-type="date">
+    </div>`;
+  }
+  if (field.type === "radio" || field.type === "checkbox") {
+    let opts = "";
+    field.options.forEach(o => {
+      const cls = (o.toLowerCase() === "non") ? "opt-btn opt-non" : "opt-btn";
+      opts += `<div class="${cls}" data-entry="${field.entry}" data-value="${esc(o)}" data-mode="${field.type}">${esc(o)}</div>`;
+    });
+    return `<div class="field">
+      <label class="flabel">${esc(field.label)}${field.required ? '<span class="req">*</span>' : ""}</label>
+      <div class="opt-row">${opts}</div>
+    </div>`;
+  }
+  if (field.type === "grid") {
+    let rows = "";
+    field.rows.forEach(row => {
+      let opts = "";
+      field.options.forEach(o => {
+        const cls = (o.toLowerCase() === "non") ? "opt-btn opt-non" : "opt-btn";
+        opts += `<div class="${cls}" data-entry="${row.entry}" data-value="${esc(o)}" data-mode="radio">${esc(o)}</div>`;
+      });
+      rows += `<div class="grid-row">
+        <div class="glabel">${esc(row.label)}${field.required ? '<span class="req">*</span>' : ""}</div>
+        <div class="opt-row">${opts}</div>
+      </div>`;
+    });
+    return `<div class="grid-section">
+      <div class="gtitle">${esc(field.title)}</div>
+      ${rows}
+    </div>`;
+  }
+  if (field.type === "photo") {
+    return `<div class="field photo-field">
+      <label class="flabel">${esc(field.label)} <span style="font-weight:400;color:var(--ink-soft);">(optionnel)</span></label>
+      <div class="photo-preview" id="photoPreview"><img id="photoImg" alt="Aperçu photo"></div>
+      <div class="photo-buttons">
+        <button type="button" class="photo-btn" id="photoTakeBtn">&#128247; Prendre / choisir une photo</button>
+      </div>
+      <input type="file" accept="image/*" capture="environment" id="photoInput" style="display:none">
+      <div class="photo-status" id="photoStatus"></div>
+    </div>`;
+  }
+  return "";
+}
+
+function handleOptionClick(btn) {
+  const entry = btn.dataset.entry;
+  const mode = btn.dataset.mode;
+  const value = btn.dataset.value;
+  const group = mainEl.querySelectorAll(`.opt-btn[data-entry="${entry}"]`);
+
+  if (mode === "checkbox") {
+    const nowSelected = !btn.classList.contains("selected");
+    btn.classList.toggle("selected", nowSelected);
+    if (!state.values[entry]) state.values[entry] = new Set();
+    if (nowSelected) state.values[entry].add(value); else state.values[entry].delete(value);
+  } else {
+    group.forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    state.values[entry] = value;
+  }
+}
+
+function wirePhotoButton() {
+  const takeBtn = document.getElementById("photoTakeBtn");
+  const input = document.getElementById("photoInput");
+  if (takeBtn && input) {
+    takeBtn.addEventListener("click", () => input.click());
+  }
+}
+
+function handlePhotoSelected(e) {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+  const statusEl = document.getElementById("photoStatus");
+  const reader = new FileReader();
+  reader.onload = async function () {
+    const base64 = reader.result;
+    state.photo.base64 = base64;
+    state.photo.filename = file.name || ("photo_" + Date.now() + ".jpg");
+    state.photo.status = "ready";
+
+    const preview = document.getElementById("photoPreview");
+    const img = document.getElementById("photoImg");
+    img.src = base64;
+    preview.style.display = "block";
+
+    statusEl.textContent = "Envoi de la photo en cours...";
+    statusEl.className = "photo-status";
+    state.photo.status = "uploading";
+
+    try {
+      const resp = await fetch(PHOTO_ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify({
+          photoBase64: base64,
+          filename: state.photo.filename,
+          label: "Photo situation dangereuse - AETSI Terrain"
+        })
+      });
+      const data = await resp.json();
+      if (data && data.success) {
+        state.photo.url = data.url;
+        state.photo.status = "uploaded";
+        statusEl.textContent = "Photo envoyée ✓";
+        statusEl.className = "photo-status ok";
+      } else {
+        throw new Error((data && data.error) || "Erreur inconnue");
+      }
+    } catch (err) {
+      state.photo.status = "error";
+      statusEl.textContent = "Échec de l'envoi de la photo (" + (err.message || err) + "). La photo ne sera pas jointe mais vous pouvez continuer.";
+      statusEl.className = "photo-status err";
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function collectAndValidate(form) {
+  const missing = [];
+  const params = new URLSearchParams();
+
+  form.fields.forEach(field => {
+    if (field.type === "text" || field.type === "textarea") {
+      const el = mainEl.querySelector(`[data-entry="${field.entry}"]`);
+      let val = el ? el.value.trim() : "";
+      if (field.photoTarget && state.photo.status === "uploaded" && state.photo.url) {
+        val = (val ? val + "\n\n" : "") + "Photo : " + state.photo.url;
+      }
+      if (field.required && !val) missing.push(field.label);
+      if (val) params.append("entry." + field.entry, val);
+    } else if (field.type === "date") {
+      const el = mainEl.querySelector(`[data-entry="${field.entry}"]`);
+      const val = el ? el.value : "";
+      if (field.required && !val) missing.push(field.label);
+      if (val) {
+        const [y, m, d] = val.split("-");
+        params.append("entry." + field.entry + "_year", y);
+        params.append("entry." + field.entry + "_month", String(parseInt(m, 10)));
+        params.append("entry." + field.entry + "_day", String(parseInt(d, 10)));
+      }
+    } else if (field.type === "radio") {
+      const val = state.values[field.entry];
+      if (field.required && !val) missing.push(field.label);
+      if (val) params.append("entry." + field.entry, val);
+    } else if (field.type === "checkbox") {
+      const set = state.values[field.entry];
+      const vals = set ? Array.from(set) : [];
+      if (field.required && vals.length === 0) missing.push(field.label);
+      vals.forEach(v => params.append("entry." + field.entry, v));
+    } else if (field.type === "grid") {
+      field.rows.forEach(row => {
+        const val = state.values[row.entry];
+        if (field.required && !val) missing.push(field.title + " – " + row.label);
+        if (val) params.append("entry." + row.entry, val);
+      });
+    }
+  });
+
+  return { missing, params };
+}
+
+function submitForm(form) {
+  const { missing, params } = collectAndValidate(form);
+  const errEl = document.getElementById("errorSummary");
+
+  if (missing.length > 0) {
+    errEl.style.display = "block";
+    errEl.innerHTML = "Veuillez compléter : <br>• " + missing.map(esc).join("<br>• ");
+    errEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  errEl.style.display = "none";
+
+  const submitBtn = document.getElementById("submitBtn");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Envoi en cours...";
+
+  const url = "https://docs.google.com/forms/d/e/" + form.actionId + "/formResponse";
+  const body = params.toString();
+
+  if (!navigator.onLine) {
+    queueSubmission(url, body);
+    showSuccess(form, true);
+    return;
+  }
+
+  fetch(url, { method: "POST", mode: "no-cors", body: params })
+    .then(() => {
+      showSuccess(form, false);
+    })
+    .catch(() => {
+      queueSubmission(url, body);
+      showSuccess(form, true);
+    });
+}
+
+function showSuccess(form, queued) {
+  const cls = queued ? "success-screen queued" : "success-screen";
+  const icon = queued ? "&#9203;" : "&#10003;";
+  const title = queued ? "Mis en attente" : "Envoyé";
+  const msg = queued
+    ? "Pas de connexion internet détectée. Le formulaire sera envoyé automatiquement dès que la connexion sera rétablie."
+    : "Le formulaire \"" + esc(form.title) + "\" a bien été transmis.";
+  mainEl.innerHTML = `<div class="${cls}">
+    <div class="check">${icon}</div>
+    <h2>${title}</h2>
+    <p>${msg}</p>
+    <button class="btn-secondary" id="backHomeBtn">Retour à l'accueil</button>
+  </div>`;
+  document.getElementById("backHomeBtn").addEventListener("click", goHome);
+}
+
+function getQueue() {
+  try {
+    return JSON.parse(localStorage.getItem(QUEUE_KEY) || "[]");
+  } catch (e) {
+    return [];
+  }
+}
+function setQueue(q) {
+  try {
+    localStorage.setItem(QUEUE_KEY, JSON.stringify(q));
+  } catch (e) {}
+}
+function queueSubmission(url, body) {
+  const q = getQueue();
+  q.push({ url, body, ts: Date.now() });
+  setQueue(q);
+}
+function flushQueue() {
+  const q = getQueue();
+  if (q.length === 0) {
+    toast("Aucun envoi en attente");
+    return;
+  }
+  if (!navigator.onLine) {
+    toast("Toujours hors connexion");
+    return;
+  }
+  toast("Envoi de " + q.length + " formulaire(s) en attente...");
+  const remaining = [];
+  let processed = 0;
+  q.forEach(item => {
+    fetch(item.url, { method: "POST", mode: "no-cors", body: item.body })
+      .catch(() => { remaining.push(item); })
+      .finally(() => {
+        processed++;
+        if (processed === q.length) {
+          setQueue(remaining);
+          if (remaining.length === 0) {
+            toast("Tous les formulaires en attente ont été envoyés ✓");
+          } else {
+            toast(remaining.length + " envoi(s) ont échoué, nouvelle tentative plus tard");
+          }
+          if (state.screen === "home") renderHome();
+        }
+      });
+  });
+}
+window.addEventListener("online", () => {
+  toast("Connexion rétablie");
+  flushQueue();
+});
+
+const _origRenderForm = renderForm;
+renderForm = function (form) {
+  _origRenderForm(form);
+  wirePhotoButton();
+};
+
+goHome();
+</script>
+</body>
+</html>
