@@ -1,0 +1,9 @@
+{
+  "appId": "fr.aetsi.terrain",
+  "appName": "Terrain AETSI",
+  "webDir": "www",
+  "backgroundColor": "#f1f2f7",
+  "plugins": {
+    "SystemBars": { "insetsHandling": "css" }
+  }
+}
